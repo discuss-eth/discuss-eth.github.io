@@ -4,7 +4,8 @@ branches:
   - master
 node_js:
   - "node"
-after_script:
+script:
+  - "npm test"
   - "npm run build"
 cache:
   directories:
