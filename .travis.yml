@@ -1,13 +1,12 @@
 language: node_js
 branches:
   only:
-  - src
+  - master
 node_js:
 - "node"
-cache: yarn
-script:
-- "yarn test"
-- "yarn build"
+cache:
+  directories:
+    - "node_modules"
 deploy:
   provider: pages
   skip_cleanup: true
