@@ -4,7 +4,6 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import Web3 from 'web3';
-import { BrowserRouter } from 'react-router-dom';
 import * as contracts from './util/contracts';
 import _ from 'underscore';
 import Promise from 'bluebird';
@@ -31,9 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
   );
 
   ReactDOM.render(
-    <BrowserRouter>
-      <App/>
-    </BrowserRouter>,
+    <App/>,
     document.getElementById('root')
   );
 });

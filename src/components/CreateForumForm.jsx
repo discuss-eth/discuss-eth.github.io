@@ -8,12 +8,12 @@ export default controllable(
     static propTypes = { value: PropTypes.object, onChange: PropTypes.func.isRequired };
 
     handleChange = (e, { name, value }) => {
-      console.log(name, value);
       this.props.onChange({ ...this.props.value, [ name ]: value });
     };
 
     render() {
-      const { ...rest } = this.props;
+      const { value, onChange, ...rest } = this.props;
+
       return (
         <Form {...rest}>
           <Form.Input placeholder="Ethereum Development" label="Forum Name" type="text" name="name"
