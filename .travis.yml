@@ -3,7 +3,9 @@ branches:
   only:
   - master
 node_js:
-- "node"
+  - "node"
+after_script:
+  - "npm run build"
 cache:
   directories:
     - "node_modules"
