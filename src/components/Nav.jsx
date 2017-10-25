@@ -1,5 +1,17 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
+import { Button, Container, Icon, Menu } from 'semantic-ui-react';
+
+const MenuLink = ({ to, ...rest }) => (
+  <Route path={to}>
+    {
+      ({ match }) => (
+        <Menu.Item as={Link} to={to} active={match !== null} {...rest}/>
+      )
+    }
+  </Route>
+);
+
 
 export default class Nav extends Component {
   static propTypes = {};
@@ -7,30 +19,18 @@ export default class Nav extends Component {
 
   render() {
     return (
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link to="/forums">
-              Forums
-            </Link>
-          </li>
-          <li>
-            <Link to="/threads">
-              Threads
-            </Link>
-          </li>
-          <li>
-            <Link to="/users">
-              Users
-            </Link>
-          </li>
-        </ul>
-      </nav>
+      <Menu size="large">
+        <Container>
+          <MenuLink to="/home">Home</MenuLink>
+          <MenuLink to="/forums">Forums</MenuLink>
+          <MenuLink to="/users">Users</MenuLink>
+          <Menu.Menu position="right">
+            <Menu.Item className="item">
+              <Button primary><Icon name="user"/> Select User</Button>
+            </Menu.Item>
+          </Menu.Menu>
+        </Container>
+      </Menu>
     );
   }
 }

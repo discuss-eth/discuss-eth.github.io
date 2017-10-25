@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ForumPage from './pages/ForumPage';
 import Nav from './components/Nav';
+import Footer from './components/Footer';
 
-class App extends Component {
+export default class App extends Component {
   render() {
     return (
       <BrowserRouter>
@@ -17,15 +18,10 @@ class App extends Component {
             </Switch>
           </main>
 
-          <footer>
-          <span>
-            <a href="https://github.com/discuss-eth/discuss-eth-webapp">discuss.eth</a>
-          </span>
-          </footer>
+
+          <Footer/>
         </div>
       </BrowserRouter>
     );
   }
 }
-
-export default App;
