@@ -3,6 +3,8 @@ import { Registry } from '../util/contracts';
 import withAccounts from '../util/withAccounts';
 import PropTypes from 'prop-types';
 import _ from 'underscore';
+import CreateForumForm from '../components/CreateForumForm';
+import { Container } from 'semantic-ui-react';
 
 export default withAccounts(
   class ForumPage extends Component {
@@ -11,7 +13,8 @@ export default withAccounts(
     };
 
     state = {
-      forumLogs: []
+      forumLogs: [],
+      formValue: {}
     };
 
     async componentDidMount() {
@@ -26,7 +29,7 @@ export default withAccounts(
 
     handleSubmit = async e => {
       e.preventDefault();
-      const { name: { value: name }, reputationThreshold: { value: reputationThreshold } } = this.refs;
+      const { formValue: { name, reputationThreshold } } = this.state;
 
       const registry = await Registry.deployed();
 
@@ -36,28 +39,26 @@ export default withAccounts(
     };
 
 
+    setFormValue = formValue => this.setState({ formValue });
+
     render() {
       return (
-        <div>
-          <form onSubmit={this.handleSubmit}>
-            <input type="text" placeholder="name" ref="name"/>
-            <input type="number" placeholder="reputationThreshold" ref="reputationThreshold"/>
-            <button type="submit">Create forum</button>
-          </form>
+        <Container>
+          <CreateForumForm onSubmit={this.handleSubmit} onChange={this.setFormValue}/>
 
           <ul>
             {
               _.map(
                 this.state.forumLogs,
-                ({ args: { administrator, newForumAddress, hashedName, name } }) => (
-                  <li>
+                ({ args: { administrator, newForumAddress, hashedName, name } }, ix) => (
+                  <li key={ix}>
                     {administrator} - {newForumAddress} - {hashedName} - {name}
                   </li>
                 )
               )
             }
           </ul>
-        </div>
+        </Container>
       );
     }
   }

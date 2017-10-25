@@ -1,36 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Link, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import ForumPage from './pages/ForumPage';
+import Nav from './components/Nav';
 
 class App extends Component {
   render() {
     return (
       <div>
-        <header>
-          <ul>
-            <li>
-              <Link to="/">
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link to="/forums">
-                Forums
-              </Link>
-            </li>
-            <li>
-              <Link to="/threads">
-                Threads
-              </Link>
-            </li>
-            <li>
-              <Link to="/users">
-                Users
-              </Link>
-            </li>
-          </ul>
-        </header>
+        <Nav/>
 
         <main>
           <Switch>
