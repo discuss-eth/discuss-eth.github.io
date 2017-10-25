@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Link, Switch } from 'react-router-dom';
+import { Link, Route, Switch } from 'react-router-dom';
+import ForumPage from './pages/ForumPage';
 
 class App extends Component {
   render() {
@@ -33,7 +34,8 @@ class App extends Component {
 
         <main>
           <Switch>
-
+            <Route path="/forums" exact component={ForumPage}/>
+            <Route path="/" exact/>
           </Switch>
         </main>
 
