@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ForumPage from './pages/ForumPage';
 import Nav from './components/Nav';
