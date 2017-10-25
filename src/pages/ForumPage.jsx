@@ -4,7 +4,7 @@ import withAccounts from '../util/withAccounts';
 import PropTypes from 'prop-types';
 import _ from 'underscore';
 import CreateForumForm from '../components/CreateForumForm';
-import { Container } from 'semantic-ui-react';
+import { Container, List } from 'semantic-ui-react';
 
 export default withAccounts(
   class ForumPage extends Component {
@@ -46,18 +46,19 @@ export default withAccounts(
         <Container>
           <CreateForumForm onSubmit={this.handleSubmit} onChange={this.setFormValue}/>
 
-          <ul>
+          <List>
             {
               _.map(
                 this.state.forumLogs,
                 ({ args: { administrator, newForumAddress, hashedName, name } }, ix) => (
-                  <li key={ix}>
-                    {administrator} - {newForumAddress} - {hashedName} - {name}
-                  </li>
+                  <List.Item key={ix}>
+                    <List.Header>{name}</List.Header>
+                    <List.Content>Address: {newForumAddress}</List.Content>
+                  </List.Item>
                 )
               )
             }
-          </ul>
+          </List>
         </Container>
       );
     }

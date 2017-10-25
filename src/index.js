@@ -13,8 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('using existing web3 provider');
     window.web3 = new Web3(window.web3.currentProvider);
   } else {
-    console.log('using infura, in read-only mode');
-    window.web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
+    console.log('using kovan infura, in read-only mode');
+    window.web3 = new Web3(new Web3.providers.HttpProvider('https://kovan.infura.io/0eep3H3CSiqitPXv0aOy'));
   }
 
   _.each(
