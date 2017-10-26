@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Route } from 'react-router-dom';
 import { Button, Container, Icon, Menu } from 'semantic-ui-react';
+import NetworkStatus from './NetworkStatus';
 
 const MenuLink = ({ to, ...rest }) => (
   <Route path={to}>
@@ -25,6 +26,9 @@ export default class Nav extends Component {
           <MenuLink to="/forums">Forums</MenuLink>
           <MenuLink to="/users">Users</MenuLink>
           <Menu.Menu position="right">
+            <Menu.Item>
+              <NetworkStatus/>
+            </Menu.Item>
             <Menu.Item className="item">
               <Button primary><Icon name="user"/> Select User</Button>
             </Menu.Item>
