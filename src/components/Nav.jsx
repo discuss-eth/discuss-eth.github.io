@@ -20,7 +20,7 @@ export default class Nav extends Component {
 
   render() {
     return (
-      <Menu size="large">
+      <Menu size="large" stackable>
         <Container>
           <MenuLink to="/home">Home</MenuLink>
           <MenuLink to="/forums">Forums</MenuLink>
