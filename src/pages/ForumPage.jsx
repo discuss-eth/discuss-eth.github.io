@@ -1,64 +1,45 @@
 import React, { Component } from 'react';
-import { Registry } from '../util/contracts';
-import withAccounts from '../util/withAccounts';
 import PropTypes from 'prop-types';
 import _ from 'underscore';
-import CreateForumForm from '../components/CreateForumForm';
 import { Container, List } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import { fetchForums } from '../actions/logs';
+import getLogKey from '../util/get-log-key';
+import TriggerOnChange from '../components/TriggerOnChange';
 
-export default withAccounts(
+export default connect(
+  ({ logs: { [ getLogKey({ contractName: 'Registry', eventName: 'LogRegisterForum' }) ]: forums } }) => ({ forums }),
+  { fetchForums }
+)(
   class ForumPage extends Component {
     static propTypes = {
-      accounts: PropTypes.arrayOf(PropTypes.string).isRequired
+      forums: PropTypes.object
     };
-
-    state = {
-      forumLogs: [],
-      formValue: {}
-    };
-
-    async componentDidMount() {
-      const registry = await Registry.deployed();
-
-      this._filter = registry.LogRegisterForum({}, { fromBlock: 0 });
-
-      this._filter.watch((err, forumLog) => {
-        this.setState(({ forumLogs }) => ({ forumLogs: [ ...forumLogs, forumLog ] }));
-      });
-    }
-
-    handleSubmit = async e => {
-      e.preventDefault();
-      const { formValue: { name, reputationThreshold } } = this.state;
-
-      const registry = await Registry.deployed();
-
-      const registration = await registry.registerForum(name, reputationThreshold, { from: this.props.accounts[ 0 ] });
-
-      console.log(registration);
-    };
-
-
-    setFormValue = formValue => this.setState({ formValue });
 
     render() {
+      const { fetchForums, forums } = this.props;
+
       return (
         <Container>
-          <CreateForumForm onSubmit={this.handleSubmit} onChange={this.setFormValue}/>
+          <TriggerOnChange functions={[ fetchForums ]}/>
 
-          <List>
-            {
-              _.map(
-                this.state.forumLogs,
-                ({ args: { administrator, newForumAddress, hashedName, name } }, ix) => (
-                  <List.Item key={ix}>
-                    <List.Header>{name}</List.Header>
-                    <List.Content>Address: {newForumAddress}</List.Content>
-                  </List.Item>
-                )
-              )
-            }
-          </List>
+          {
+            forums ? (
+              <List>
+                {
+                  _.map(
+                    forums.logs,
+                    ({ args: { administrator, newForumAddress, hashedName, name } }, ix) => (
+                      <List.Item key={ix}>
+                        <List.Header>{name}</List.Header>
+                        <List.Content>Address: {newForumAddress}</List.Content>
+                      </List.Item>
+                    )
+                  )
+                }
+              </List>
+            ) : null
+          }
         </Container>
       );
     }

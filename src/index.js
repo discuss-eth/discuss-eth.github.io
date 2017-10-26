@@ -6,6 +6,10 @@ import Web3 from 'web3';
 import * as contracts from './util/contracts';
 import _ from 'underscore';
 import Promise from 'bluebird';
+import { BrowserRouter } from 'react-router-dom';
+import Provider from 'react-redux/src/components/Provider';
+import configureStore from './util/configure-store';
+import { startPolling } from './actions/web3';
 
 document.addEventListener('DOMContentLoaded', () => {
   if (typeof window.web3 !== 'undefined') {
@@ -28,8 +32,15 @@ document.addEventListener('DOMContentLoaded', () => {
     key => Promise.promisifyAll(window.web3[ key ])
   );
 
+  const store = configureStore();
+  store.dispatch(startPolling());
+
   ReactDOM.render(
-    <App/>,
+    <Provider store={store}>
+      <BrowserRouter>
+        <App/>
+      </BrowserRouter>
+    </Provider>,
     document.getElementById('root')
   );
 });
