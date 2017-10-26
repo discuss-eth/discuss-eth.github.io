@@ -28,7 +28,7 @@ export function startPolling() {
         );
     }
 
-    setInterval(intervalFunction, 1000);
+    setInterval(intervalFunction, 500);
   };
 }
 

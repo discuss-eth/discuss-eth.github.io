@@ -14,8 +14,8 @@ export default class Footer extends Component {
               <Grid.Column width={3}>
                 <Header inverted as='h4' content='About'/>
                 <List link inverted>
-                  <List.Item as='a' href="https://github.com/discuss-eth/discuss-eth-webapp">GitHub</List.Item>
-                  <List.Item as='a'>Contact Us</List.Item>
+                  <List.Item as='a' href="https://github.com/discuss-eth/discuss-eth.github.io">GitHub</List.Item>
+                  <List.Item as='a' href="mailto:moody.salem+discuss-eth@gmail.com">Contact Us</List.Item>
                 </List>
               </Grid.Column>
               <Grid.Column width={7}>

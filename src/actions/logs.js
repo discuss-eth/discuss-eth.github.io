@@ -6,8 +6,13 @@ const CONTRACTS = {
 };
 
 function fetchLogs(contractName, eventName, filters = {}, filterKey = null) {
-  return async dispatch => {
+  return async (dispatch, getState) => {
+    const { web3: { networkId } } = getState();
+
     const meta = { contractName, eventName, filterKey };
+
+    const AbstractContract = CONTRACTS[ contractName ];
+    AbstractContract.setNetwork(networkId);
 
     // get the contract instance
     let contract;

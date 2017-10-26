@@ -7,10 +7,10 @@ import Footer from './components/Footer';
 export default class App extends Component {
   render() {
     return (
-      <div>
+      <div style={{ display: 'flex', minHeight: '100vh', flexDirection: 'column' }}>
         <Nav/>
 
-        <main>
+        <main style={{ flexGrow: 1 }}>
           <Switch>
             <Route path="/forums" exact component={ForumPage}/>
             <Route path="/" exact/>

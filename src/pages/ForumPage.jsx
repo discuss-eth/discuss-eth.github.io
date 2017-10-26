@@ -26,7 +26,7 @@ export default connect(
           {
             forums ? (
               <Dimmer.Dimmable>
-                <Dimmer active={forums.loading}/>
+                <Dimmer active={forums.loading} inverted/>
                 <List>
                   {
                     _.map(
