@@ -19,6 +19,15 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('using kovan infura, in read-only mode');
     window.web3 = new Web3(new Web3.providers.HttpProvider('https://kovan.infura.io/0eep3H3CSiqitPXv0aOy'));
   }
+  
+  // https://github.com/trufflesuite/truffle-contract/issues/57
+  if (typeof window.web3.currentProvider.sendAsync !== "function") {
+    window.web3.currentProvider.sendAsync = function() {
+      return contract.currentProvider.send.apply(
+        contract.currentProvider, arguments
+      );
+    };
+  }
 
   _.each(
     contracts,
@@ -31,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     [ 'eth' ],
     key => Promise.promisifyAll(window.web3[ key ])
   );
-
+  
   const store = configureStore();
   store.dispatch(startPolling());
 
