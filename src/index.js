@@ -22,9 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // https://github.com/trufflesuite/truffle-contract/issues/57
   if (typeof window.web3.currentProvider.sendAsync !== "function") {
-    window.web3.currentProvider.sendAsync = function() {
-      return contract.currentProvider.send.apply(
-        contract.currentProvider, arguments
+    window.web3.currentProvider.sendAsync = function () {
+      return window.web3.currentProvider.send.apply(
+        window.web3.currentProvider, arguments
       );
     };
   }
