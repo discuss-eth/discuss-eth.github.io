@@ -14,6 +14,7 @@ export default function logsReducer(state = {}, { type, payload, meta }) {
       return {
         ...state,
         [ stateKey ]: {
+          logs: [],
           ...state[ stateKey ],
           error: null,
           loading: true
