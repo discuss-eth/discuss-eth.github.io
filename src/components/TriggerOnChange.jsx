@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import _ from 'underscore';
@@ -42,7 +42,6 @@ export default connect(
       const pluck = obj => _.pick(obj, watchKeys);
 
       if (!_.isEqual(pluck(web3), pluck(this.props.web3))) {
-        console.log('web3 info updated, triggering updates');
         _.each(
           functions,
           func => func()

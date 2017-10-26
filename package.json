@@ -8,7 +8,6 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "homepage": "/discuss-eth-webapp",
   "devDependencies": {
     "bluebird": "^3.5.1",
     "discuss-eth-contracts": "0.0.18",

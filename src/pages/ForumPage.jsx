@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'underscore';
-import { Container, List } from 'semantic-ui-react';
+import { Container, Dimmer, List } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { fetchForums } from '../actions/logs';
 import getLogKey from '../util/get-log-key';
@@ -25,19 +25,22 @@ export default connect(
 
           {
             forums ? (
-              <List>
-                {
-                  _.map(
-                    forums.logs,
-                    ({ args: { administrator, newForumAddress, hashedName, name } }, ix) => (
-                      <List.Item key={ix}>
-                        <List.Header>{name}</List.Header>
-                        <List.Content>Address: {newForumAddress}</List.Content>
-                      </List.Item>
+              <Dimmer.Dimmable>
+                <Dimmer active={forums.loading}/>
+                <List>
+                  {
+                    _.map(
+                      forums.logs,
+                      ({ args: { administrator, newForumAddress, hashedName, name } }, ix) => (
+                        <List.Item key={ix}>
+                          <List.Header>{name}</List.Header>
+                          <List.Content>Address: {newForumAddress}</List.Content>
+                        </List.Item>
+                      )
                     )
-                  )
-                }
-              </List>
+                  }
+                </List>
+              </Dimmer.Dimmable>
             ) : null
           }
         </Container>
