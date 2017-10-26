@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
-import ForumPage from './pages/ForumPage';
 import Nav from './components/Nav';
 import Footer from './components/Footer';
+import PageRouter from './PageRouter';
 
 export default class App extends Component {
   render() {
@@ -11,10 +10,7 @@ export default class App extends Component {
         <Nav/>
 
         <main style={{ flexGrow: 1 }}>
-          <Switch>
-            <Route path="/forums" exact component={ForumPage}/>
-            <Route path="/" exact/>
-          </Switch>
+          <PageRouter/>
         </main>
 
         <Footer/>
