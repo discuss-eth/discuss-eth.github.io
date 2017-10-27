@@ -10,6 +10,7 @@ import { BrowserRouter } from 'react-router-dom';
 import configureStore from './util/configure-store';
 import { startPolling } from './actions/web3';
 import { Provider } from 'react-redux';
+import ZeroClientProvider from 'web3-provider-engine/zero.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   if (typeof window.web3 !== 'undefined') {
@@ -17,7 +18,18 @@ document.addEventListener('DOMContentLoaded', () => {
     window.web3 = new Web3(window.web3.currentProvider);
   } else {
     console.log('using kovan infura, in read-only mode');
-    window.web3 = new Web3(new Web3.providers.HttpProvider('https://kovan.infura.io/0eep3H3CSiqitPXv0aOy'));
+    window.web3 = new Web3(
+      ZeroClientProvider({
+        static: {
+          eth_syncing: false,
+          web3_clientVersion: 'ZeroClientProvider',
+        },
+        pollingInterval: 99999999, // not interested in polling for new blocks
+        rpcUrl: 'https://kovan.infura.io/0eep3H3CSiqitPXv0aOy',
+        // account mgmt
+        getAccounts: (cb) => cb(null, [])
+      })
+    );
   }
   
   // https://github.com/trufflesuite/truffle-contract/issues/57
