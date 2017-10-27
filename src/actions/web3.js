@@ -33,7 +33,7 @@ export function startPolling() {
           .catch(error => console.error('failed to get web3 info', error))
           .then(() => interval());
       },
-      1000
+      250
     );
 
     interval();
