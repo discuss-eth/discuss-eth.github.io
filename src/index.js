@@ -24,9 +24,10 @@ document.addEventListener('DOMContentLoaded', () => {
           eth_syncing: false,
           web3_clientVersion: 'ZeroClientProvider',
         },
-        pollingInterval: 99999999, // not interested in polling for new blocks
+        // not interested in polling for new blocks
+        pollingInterval: 99999999,
         rpcUrl: 'https://kovan.infura.io/0eep3H3CSiqitPXv0aOy',
-        // account mgmt
+        // no accounts
         getAccounts: (cb) => cb(null, [])
       })
     );
@@ -49,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
   );
 
   const store = configureStore();
-  store.dispatch(startPolling(isNativeProvider ? 100 : 1000));
+  store.dispatch(startPolling(isNativeProvider ? 100 : 10000));
 
   ReactDOM.render(
     <Provider store={store}>
