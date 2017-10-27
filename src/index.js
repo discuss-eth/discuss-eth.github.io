@@ -5,7 +5,6 @@ import registerServiceWorker from './registerServiceWorker';
 import Web3 from 'web3';
 import * as contracts from './util/contracts';
 import _ from 'underscore';
-import Promise from 'bluebird';
 import { BrowserRouter } from 'react-router-dom';
 import configureStore from './util/configure-store';
 import { startPolling } from './actions/web3';
@@ -48,11 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   );
 
-  _.each(
-    [ 'eth' ],
-    key => Promise.promisifyAll(window.web3[ key ])
-  );
-  
   const store = configureStore();
   store.dispatch(startPolling());
 

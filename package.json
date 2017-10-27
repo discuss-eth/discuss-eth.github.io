@@ -9,7 +9,6 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "bluebird": "^3.5.1",
     "discuss-eth-contracts": "0.0.18",
     "react": "^16.0.0",
     "react-controllables": "^0.6.0",
