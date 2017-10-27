@@ -9,7 +9,6 @@ import { BrowserRouter } from 'react-router-dom';
 import configureStore from './util/configure-store';
 import { startPolling } from './actions/web3';
 import { Provider } from 'react-redux';
-import ZeroClientProvider from 'web3-provider-engine/dist/ZeroClientProvider.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   let isNativeProvider = false;
@@ -20,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     console.log('using kovan infura, in read-only mode');
     window.web3 = new Web3(
-      ZeroClientProvider({
+      window.ZeroClientProvider({
         static: {
           eth_syncing: false,
           web3_clientVersion: 'ZeroClientProvider',
