@@ -9,7 +9,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "discuss-eth-contracts": "0.0.18",
+    "discuss-eth-contracts": "0.0.21",
     "react": "^16.0.0",
     "react-controllables": "^0.6.0",
     "react-dom": "^16.0.0",
