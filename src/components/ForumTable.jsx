@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Table } from 'semantic-ui-react';
+import { Button, Table } from 'semantic-ui-react';
 import _ from 'underscore';
+import { Link } from 'react-router-dom';
 
 export default class ForumTable extends Component {
   static propTypes = {
@@ -42,6 +43,12 @@ export default class ForumTable extends Component {
               )
             )
           }
+
+          <Table.Row key="add">
+            <Table.Cell textAlign="center" colSpan={3}>
+              <Button positive as={Link} to="/forums/create">Create forum</Button>
+            </Table.Cell>
+          </Table.Row>
         </Table.Body>
       </Table>
     );

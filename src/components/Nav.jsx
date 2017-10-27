@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Link, Route } from 'react-router-dom';
-import { Button, Container, Icon, Menu, Modal } from 'semantic-ui-react';
+import { Button, Container, Menu, Modal } from 'semantic-ui-react';
 import Stateless from 'react-web3-network-status/stateless';
 import { connect } from 'react-redux';
 
 const MenuLink = ({ to, ...rest }) => (
-  <Route path={to}>
+  <Route exact path={to}>
     {
       ({ match }) => (
         <Menu.Item as={Link} to={to} active={match !== null} {...rest}/>
@@ -33,9 +33,10 @@ const SelectUser = connect(
         <Menu.Item className="item">
           <Button
             primary
+            loading={web3 === null}
             disabled={web3 === null || web3.accounts === null || web3.accounts.length === 0 || !web3.isDeployed}
             onClick={this.openModal}>
-            <Icon name="user"/> Select User
+            Select User
           </Button>
 
           <Modal dimmer="blurring" open={open} onClose={this.closeModal}>
@@ -75,9 +76,9 @@ const NetworkStatus = connect(
 export default class Nav extends Component {
   render() {
     return (
-      <Menu size="large" stackable style={{ height: 52 }}>
+      <Menu size="large" stackable style={{ height: 52 }} pointing>
         <Container>
-          <MenuLink to="/home">Home</MenuLink>
+          <MenuLink to="/">Home</MenuLink>
           <MenuLink to="/forums">Forums</MenuLink>
           <MenuLink to="/users">Users</MenuLink>
           <Menu.Menu position="right">

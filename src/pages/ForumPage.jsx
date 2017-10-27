@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Container, Dimmer, Header } from 'semantic-ui-react';
+import { Container, Dimmer, Header, Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { fetchForums } from '../actions/logs';
 import getLogKey from '../util/get-log-key';
@@ -23,7 +23,11 @@ export default connect(
         <Container>
           <TriggerOnChange functions={[ fetchForums ]}/>
 
-          <Header as='h1'>Forums</Header>
+          <Header size="huge">
+            <Header.Content>
+              <Icon name="tags"/> Forums
+            </Header.Content>
+          </Header>
 
           {
             forums ? (
