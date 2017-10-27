@@ -17,7 +17,7 @@ export default connect(
     };
 
     static defaultProps = {
-      watchKeys: [ 'accounts', 'networkId', 'networkType' ]
+      watchKeys: [ 'accounts', 'networkId' ]
     };
 
     componentDidMount() {
