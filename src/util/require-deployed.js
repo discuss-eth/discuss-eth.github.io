@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Container, Loader, Segment } from 'semantic-ui-react';
+import Stateless from 'react-web3-network-status/stateless';
 
 export default function RequireDeployed(WrappedComponent) {
   return connect(
@@ -9,6 +10,7 @@ export default function RequireDeployed(WrappedComponent) {
     class RequiresDeployed extends Component {
       render() {
         const { web3, ...rest } = this.props;
+
         if (web3 === null) {
           return <Loader active inline="centered"/>;
         }
@@ -17,7 +19,10 @@ export default function RequireDeployed(WrappedComponent) {
           return (
             <Container>
               <Segment padded color="red">
-                Discuss.eth is not deployed on the network <strong>{web3.networkType}</strong>
+                <span style={{ marginRight: 16 }}>
+                  <Stateless networkId={web3.networkId}/>
+                </span>
+                <strong>Discuss.eth</strong> is not deployed on the network
               </Segment>
             </Container>
           );

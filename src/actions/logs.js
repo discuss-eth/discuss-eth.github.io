@@ -13,6 +13,7 @@ function fetchLogs(contractName, eventName, filters = {}, filterKey = null) {
 
     const AbstractContract = CONTRACTS[ contractName ];
     AbstractContract.setNetwork(networkId);
+    console.log(`fetching ${contractName}.${eventName}.${filterKey} for network ${networkId}`);
 
     // get the contract instance
     let contract;

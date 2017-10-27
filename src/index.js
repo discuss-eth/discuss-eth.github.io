@@ -9,11 +9,13 @@ import { BrowserRouter } from 'react-router-dom';
 import configureStore from './util/configure-store';
 import { startPolling } from './actions/web3';
 import { Provider } from 'react-redux';
-import ZeroClientProvider from 'web3-provider-engine/zero.js';
+import ZeroClientProvider from 'web3-provider-engine/dist/ZeroClientProvider.js';
 
 document.addEventListener('DOMContentLoaded', () => {
+  let isNativeProvider = false;
   if (typeof window.web3 !== 'undefined') {
     console.log('using existing web3 provider');
+    isNativeProvider = true;
     window.web3 = new Web3(window.web3.currentProvider);
   } else {
     console.log('using kovan infura, in read-only mode');
@@ -30,9 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
       })
     );
   }
-  
+
   // https://github.com/trufflesuite/truffle-contract/issues/57
-  if (typeof window.web3.currentProvider.sendAsync !== "function") {
+  if (typeof window.web3.currentProvider.sendAsync !== 'function') {
     window.web3.currentProvider.sendAsync = function () {
       return window.web3.currentProvider.send.apply(
         window.web3.currentProvider, arguments
@@ -48,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
   );
 
   const store = configureStore();
-  store.dispatch(startPolling());
+  store.dispatch(startPolling(isNativeProvider ? 100 : 1000));
 
   ReactDOM.render(
     <Provider store={store}>

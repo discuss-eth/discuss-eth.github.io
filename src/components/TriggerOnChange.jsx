@@ -10,11 +10,10 @@ export default connect(
     static propTypes = {
       web3: PropTypes.shape({
         accounts: PropTypes.arrayOf(PropTypes.string).isRequired,
-        networkId: PropTypes.number.isRequired,
-        networkType: PropTypes.string.isRequired
+        networkId: PropTypes.number.isRequired
       }),
       functions: PropTypes.arrayOf(PropTypes.func).isRequired,
-      watchKeys: PropTypes.arrayOf(PropTypes.oneOf([ 'accounts', 'networkId', 'networkType' ]))
+      watchKeys: PropTypes.arrayOf(PropTypes.oneOf([ 'accounts', 'networkId', 'isDeployed' ]))
     };
 
     static defaultProps = {
