@@ -22,17 +22,23 @@ const SelectUser = connect(
       open: false
     };
 
+    openModal = () => this.setState({ open: true });
+    closeModal = () => this.setState({ open: false });
+
     render() {
       const { web3 } = this.props;
       const { open } = this.state;
 
       return (
         <Menu.Item className="item">
-          <Button primary disabled={web3 === null || web3.accounts === null || web3.accounts.length === 0}
-                  onClick={() => this.setState({ open: !open })}>
+          <Button
+            primary
+            disabled={web3 === null || web3.accounts === null || web3.accounts.length === 0 || !web3.isDeployed}
+            onClick={this.openModal}>
             <Icon name="user"/> Select User
           </Button>
-          <Modal open={open} onClose={() => this.setState({ open: false })}>
+
+          <Modal dimmer="blurring" open={open} onClose={this.closeModal}>
             <Modal.Header>Select User</Modal.Header>
             <Modal.Content>
               hello world
@@ -69,7 +75,7 @@ const NetworkStatus = connect(
 export default class Nav extends Component {
   render() {
     return (
-      <Menu size="large" stackable>
+      <Menu size="large" stackable style={{ height: 52 }}>
         <Container>
           <MenuLink to="/home">Home</MenuLink>
           <MenuLink to="/forums">Forums</MenuLink>
