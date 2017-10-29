@@ -5,20 +5,23 @@ const CONTRACTS = {
   Registry
 };
 
-function fetchLogs(contractName, eventName, filters = {}, filterKey = null) {
+export function fetchLogs(contractName, eventName, address = null, filters = {}, filterKey = null) {
   return async (dispatch, getState) => {
     const { web3: { networkId } } = getState();
 
-    const meta = { contractName, eventName, filterKey };
+    const meta = { contractName, eventName, address, filterKey };
 
     const AbstractContract = CONTRACTS[ contractName ];
     AbstractContract.setNetwork(networkId);
-    console.log(`fetching ${contractName}.${eventName}.${filterKey} for network ${networkId}`);
 
     // get the contract instance
     let contract;
     try {
-      contract = await CONTRACTS[ contractName ].deployed();
+      if (address === null) {
+        contract = await CONTRACTS[ contractName ].deployed();
+      } else {
+        contract = await CONTRACTS[ contractName ].at(address);
+      }
     } catch (error) {
       // the contract is not deployed
       dispatch({
@@ -58,8 +61,4 @@ function fetchLogs(contractName, eventName, filters = {}, filterKey = null) {
       }
     );
   };
-}
-
-export function fetchForums() {
-  return fetchLogs('Registry', 'LogRegisterForum');
 }

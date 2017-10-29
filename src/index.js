@@ -13,11 +13,11 @@ import { Provider } from 'react-redux';
 document.addEventListener('DOMContentLoaded', () => {
   let isNativeProvider = false;
   if (typeof window.web3 !== 'undefined') {
-    console.log('using existing web3 provider');
+    console.info('using existing web3 provider');
     isNativeProvider = true;
     window.web3 = new Web3(window.web3.currentProvider);
   } else {
-    console.log('using kovan infura, in read-only mode');
+    console.info('using kovan infura, in read-only mode');
     window.web3 = new Web3(
       window.ZeroClientProvider({
         static: {

@@ -6,43 +6,43 @@ import _ from 'underscore';
 export default connect(
   ({ web3 }) => ({ web3 })
 )(
-  class TriggerOnChange extends Component {
+  class WatchWeb3Changes extends Component {
     static propTypes = {
       web3: PropTypes.shape({
         accounts: PropTypes.arrayOf(PropTypes.string).isRequired,
         networkId: PropTypes.number.isRequired
       }),
-      functions: PropTypes.arrayOf(PropTypes.func).isRequired,
+      handlers: PropTypes.arrayOf(PropTypes.func).isRequired,
       watchKeys: PropTypes.arrayOf(PropTypes.oneOf([ 'accounts', 'networkId', 'isDeployed' ]))
     };
 
     static defaultProps = {
-      watchKeys: [ 'accounts', 'networkId' ]
+      watchKeys: [ 'accounts', 'networkId', 'isDeployed' ]
     };
 
     componentDidMount() {
-      const { functions, web3 } = this.props;
+      const { handlers, web3 } = this.props;
 
       if (web3 === null) {
         return;
       }
 
       _.each(
-        functions,
+        handlers,
         func => func()
       );
     }
 
-    componentWillReceiveProps({ watchKeys, web3, functions }) {
+    componentWillReceiveProps({ watchKeys, web3, handlers }) {
       if (web3 === null) {
         return;
       }
 
-      const pluck = obj => _.pick(obj, watchKeys);
+      const pluckWatchKeys = obj => _.pick(obj, watchKeys);
 
-      if (!_.isEqual(pluck(web3), pluck(this.props.web3))) {
+      if (!_.isEqual(pluckWatchKeys(web3), pluckWatchKeys(this.props.web3))) {
         _.each(
-          functions,
+          handlers,
           func => func()
         );
       }

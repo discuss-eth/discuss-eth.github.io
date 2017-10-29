@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Container, Dimmer, Header, Icon } from 'semantic-ui-react';
-import { connect } from 'react-redux';
-import { fetchForums } from '../actions/logs';
-import getLogKey from '../util/get-log-key';
-import TriggerOnChange from '../components/TriggerOnChange';
 import ForumTable from '../components/ForumTable';
+import withLogs from '../util/with-logs';
 
-export default connect(
-  ({ logs: { [ getLogKey({ contractName: 'Registry', eventName: 'LogRegisterForum' }) ]: forums } }) => ({ forums }),
-  { fetchForums }
+export default withLogs(
+  { propName: 'forums', mapPropsToParameters: () => ({ contractName: 'Registry', eventName: 'LogRegisterForum' }) }
 )(
   class ForumPage extends Component {
     static propTypes = {
@@ -17,12 +13,10 @@ export default connect(
     };
 
     render() {
-      const { fetchForums, forums } = this.props;
+      const { forums } = this.props;
 
       return (
         <Container>
-          <TriggerOnChange functions={[ fetchForums ]}/>
-
           <Header size="huge">
             <Header.Content>
               <Icon name="tags"/> Forums
