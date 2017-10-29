@@ -1,33 +1,33 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Container, Dimmer, Header, Icon } from 'semantic-ui-react';
-import ForumTable from '../components/ForumTable';
 import withLogs from '../util/with-logs';
 import requireDeployed from '../util/require-deployed';
+import UsersTable from '../components/UsersTable';
 
 export default requireDeployed(
   withLogs(
-    { propName: 'forums', mapPropsToParameters: () => ({ contractName: 'Registry', eventName: 'LogRegisterForum' }) }
+    { propName: 'users', mapPropsToParameters: () => ({ contractName: 'Registry', eventName: 'LogRegisterUser' }) }
   )(
-    class ForumPage extends Component {
+    class UsersPage extends Component {
       static propTypes = {
-        forums: PropTypes.object
+        users: PropTypes.object
       };
 
       render() {
-        const { forums } = this.props;
+        const { users } = this.props;
 
         return (
           <Container>
             <Header size="huge">
               <Header.Content>
-                <Icon name="tags"/> Forums
+                <Icon name="users"/> Users
               </Header.Content>
             </Header>
 
             <Dimmer.Dimmable>
-              <Dimmer active={forums.loading} inverted/>
-              <ForumTable forums={forums.logs}/>
+              <Dimmer active={users.loading} inverted/>
+              <UsersTable users={users.logs}/>
             </Dimmer.Dimmable>
           </Container>
         );
