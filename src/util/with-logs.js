@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import FetchLogs from '../components/FetchLogs';
 import getLogKey from './get-log-key';
+import { DEFAULT_LOG_STATE } from '../reducers/logs';
 
 /**
  * Returns a function that you call on a Component to be wrapped
@@ -26,7 +27,7 @@ export default function withLogs({ mapPropsToParameters, propName }) {
             <Wrapped
               key="wrapped"
               {...rest}
-              {...{ [ propName ]: logs[ getLogKey(parameters) ] }}
+              {...{ [ propName ]: { ...DEFAULT_LOG_STATE, ...logs[ getLogKey(parameters) ] } }}
             />
           ];
         }

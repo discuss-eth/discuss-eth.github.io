@@ -1,6 +1,12 @@
 import { FETCHED_LOGS_ERROR, FETCHED_LOGS_START, FETCHED_LOGS_SUCCESS, UPDATE_NETWORK_INFO } from '../actions/_types';
 import getLogKey from '../util/get-log-key';
 
+export const DEFAULT_LOG_STATE = {
+  logs: [],
+  error: null,
+  loading: true
+};
+
 export default function logsReducer(state = {}, { type, payload, meta }) {
   switch (type) {
     // when the network or accounts update, reset all logs state

@@ -1,8 +1,9 @@
 import { FETCHED_LOGS_ERROR, FETCHED_LOGS_START, FETCHED_LOGS_SUCCESS } from './_types';
-import { Registry } from '../util/contracts';
+import { Forum, Registry } from '../util/contracts';
 
 const CONTRACTS = {
-  Registry
+  Registry,
+  Forum
 };
 
 export function fetchLogs(contractName, eventName, address = null, filters = {}, filterKey = null) {

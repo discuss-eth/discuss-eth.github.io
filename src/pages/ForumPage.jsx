@@ -23,14 +23,10 @@ export default withLogs(
             </Header.Content>
           </Header>
 
-          {
-            forums ? (
-              <Dimmer.Dimmable>
-                <Dimmer active={forums.loading} inverted/>
-                <ForumTable forums={forums.logs}/>
-              </Dimmer.Dimmable>
-            ) : null
-          }
+          <Dimmer.Dimmable>
+            <Dimmer active={forums.loading} inverted/>
+            <ForumTable forums={forums.logs}/>
+          </Dimmer.Dimmable>
         </Container>
       );
     }
